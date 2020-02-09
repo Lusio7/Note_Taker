@@ -42,3 +42,24 @@ module.exports = function(app) {
       });
     });
   });
+
+  // DELETE route
+  app.delete("/api/notes/:id", function(req, res) {
+    // // get post data from req.body
+    const deleteId = req.params.id;
+    console.log("look here", deleteId);
+    // query database to delete submitted notes
+    db.query("SELECT * FROM notes", (err, tableData) => {
+
+      db.query("DELETE FROM notes WHERE id = ?", deleteId, (err, deleteId) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).end();
+        }
+        res.json(deleteId)
+      });
+    });
+  });
+
+
+}
