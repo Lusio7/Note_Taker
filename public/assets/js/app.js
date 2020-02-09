@@ -77,3 +77,20 @@ const showNotes = function () {
   });
 }
 
+// BUTTON TO DELETE NOTE
+
+var clearNote = function() {
+    console.log("Hello", $(this).attr("id"));
+  
+    $.ajax({
+      url: "/api/notes/" + $(this).attr("id"),
+      method: "DELETE",
+    }).then(function(data) {
+     location.reload();
+    });
+  };
+  
+  $(document).on("click", ".deleteNote", clearNote);
+  
+  
+  showNotes();
