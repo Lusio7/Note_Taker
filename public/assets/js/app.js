@@ -52,4 +52,28 @@ const showNotes = function () {
     if (data) {
       console.log(data)
 
-      
+      for (var i = 0; i < data.length; i++) {
+        var note = data[i];
+        
+        var listItem = $("<li class='list-group-item'>");
+        
+        var listItemDetail = $("<div>");
+        
+        var titleDiv = $("<p class = 'titleDiv'>");
+        titleDiv.text(note.title);
+        var noteDiv = $("<p>");
+        noteDiv.text(note.note);
+        var deleteButton = $(`<button id=${note.id} class='btn btn-danger float-top-right deleteNote'><i class='fa fa-trash fa-sm'>`);
+        deleteButton.button();
+        
+        listItemDetail.append(titleDiv).append(noteDiv).append(deleteButton);
+        listItem.append(listItemDetail);
+
+
+        $(".submitted-notes").append(listItem);
+
+      }
+    }
+  });
+}
+
