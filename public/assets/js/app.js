@@ -30,3 +30,26 @@ const submitClick = function (event) {
   }
   );
 };
+
+// Run submitClick whenever the form is submitted
+$submitBtn.on("click", submitClick);
+
+
+// GET the note from "/api.notes" to show submitted notes
+const showNotes = function () {
+  // event.preventDefault();
+  $(".submitted-notes").empty();
+  // var submittedNote = {
+  //   title: $(".list-group-item").val().trim(),
+  //   note: $(".list-group-item").val().trim(),
+  // };
+
+  // GET submitted notes saved to "/api.notes"
+    $.ajax({
+    url: "/api/notes",
+    method: "GET",
+  }).then(function(data) {
+    if (data) {
+      console.log(data)
+
+      
