@@ -20,3 +20,25 @@ module.exports = function(app) {
     });
 
   });
+
+  // POST route that takes in data from client (in req.body) and inserts into database
+  app.post("/api/notes", function(req, res) {
+
+    // get post data from req.body
+    const noteData = req.body;
+
+    // query database to add submitted notes into the saved notes list
+    db.query("SELECT * FROM notes", (err, tableData) => {
+
+      db.query("INSERT INTO notes SET ?", noteData, (err, noteData) => {
+
+        if (err) {
+          console.log(err);
+          return res.status(500).end();
+        }
+        
+        // send back message letting user know if they are on the waiting list or not
+        res.json({allNotes: noteData.allNotes});
+      });
+    });
+  });
